@@ -1,0 +1,6 @@
+-classpath '/Applications/Android Studio.app/sdk/platforms/android-19/android.jar'
+-d '/Users/gokhanbarisaker/Workspace/Android/JSONUtilities/lib/build/docs/javadoc'
+-doctitle 'lib API'
+-quiet 
+-windowtitle 'lib API'
+'/Users/gokhanbarisaker/Workspace/Android/JSONUtilities/lib/src/main/java/com/gokhanbarisaker/utilities/JSONUtilities.java'

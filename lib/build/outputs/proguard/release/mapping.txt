@@ -1,0 +1,18 @@
+com.gokhanbarisaker.utilities.JSONUtilities -> com.gokhanbarisaker.utilities.JSONUtilities:
+    java.lang.Object parse(java.lang.String,java.lang.Object) -> parse
+    org.json.JSONObject parseObject(java.lang.String,org.json.JSONObject) -> parseObject
+    org.json.JSONArray parseArray(java.lang.String,org.json.JSONArray) -> parseArray
+    java.lang.Object getObjectValue(org.json.JSONObject,java.lang.String,java.lang.Object) -> getObjectValue
+    java.lang.String getObjectString(org.json.JSONObject,java.lang.String,java.lang.String) -> getObjectString
+    java.lang.Boolean getObjectBoolean(org.json.JSONObject,java.lang.String,java.lang.Boolean) -> getObjectBoolean
+    java.lang.Integer getObjectInteger(org.json.JSONObject,java.lang.String,java.lang.Integer) -> getObjectInteger
+    org.json.JSONObject getObjectObject(org.json.JSONObject,java.lang.String,org.json.JSONObject) -> getObjectObject
+    org.json.JSONArray getObjectArray(org.json.JSONObject,java.lang.String,org.json.JSONArray) -> getObjectArray
+    java.lang.Object getArrayValue(org.json.JSONArray,int,java.lang.Object) -> getArrayValue
+    java.lang.String getArrayString(org.json.JSONArray,int,java.lang.String) -> getArrayString
+    org.json.JSONObject getArrayObject(org.json.JSONArray,int,org.json.JSONObject) -> getArrayObject
+    android.os.Bundle getArrayBundle(org.json.JSONArray,int,android.os.Bundle) -> getArrayBundle
+    org.json.JSONObject parseObject(android.os.Bundle) -> parseObject
+    android.os.Bundle parseBundle(org.json.JSONObject) -> parseBundle
+    void putBundleObject(android.os.Bundle,java.lang.String,java.lang.Object) -> a
+    boolean isLogEnabled() -> a
