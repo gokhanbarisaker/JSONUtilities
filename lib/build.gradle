@@ -1,13 +1,31 @@
+//buildscript {
+//    repositories {
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5'
+//    }
+//}
+//
+//apply plugin: 'com.jfrog.bintray'
+// apply plugin: 'maven-publish'
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+def groupId = "com.gokhanbarisaker"
+def artifactId = "jsonutilities"
+def version = "0.0.1"
+def localReleaseDest = "${buildDir}/release/${version}"
+
 
 android {
-    compileSdkVersion 'android-L'
+    compileSdkVersion 19
     buildToolsVersion "20.0.0"
 
     defaultConfig {
         applicationId "com.gokhanbarisaker.jsonutilities"
         minSdkVersion 8
-        targetSdkVersion 'L'
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
     }
@@ -21,5 +39,134 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.+'
 }
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.groupId = groupId
+        pom.artifactId = artifactId
+        pom.version = version
+        // Add other pom properties here if you want (developer details / licenses)
+        repository(url: "file://${localReleaseDest}")
+    }
+}
+
+task zipRelease(type: Zip) {
+    from localReleaseDest
+    destinationDir buildDir
+    archiveName "release-${version}.zip"
+}
+
+task generateRelease << {
+    println "Release ${version} can be found at ${localReleaseDest}/"
+    println "Release ${version} zipped can be found ${buildDir}/release-${version}.zip"
+}
+
+generateRelease.dependsOn(uploadArchives)
+generateRelease.dependsOn(zipRelease)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//def pomConfig = {
+//    licenses {
+//        license {
+//            name "The Apache Software License, Version 2.0"
+//            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+//            distribution "repo"
+//        }
+//    }
+//    developers {
+//        developer {
+//            id "gokhanbarisaker"
+//            name "Gökhan Barış Aker"
+//            email "gokhanbarisaker@gmail.com"
+//        }
+//    }
+//}
+
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication) {
+//            // from components.java
+//            // artifact sourcesJar
+//            // artifact javadocJar
+//            artifact bundleRelease
+//
+////            groupId 'com.gokhanbarisaker.jsonutilities'
+////            artifactId 'jsonutilities'
+////            version '0.0.1'
+////
+////            pom.withXml {
+////                def root = asNode()
+////                root.appendNode('description', 'JSON Utilities')
+////                root.children().last() + pomConfig
+////            }
+//        }
+//    }
+//}
+//
+//bintray {
+//    user = 'gokhanbarisaker'
+//    key = '39d1e418bb4f262f663ece35bd4dd99f6a05ce3a'
+//
+//    publications = ['mavenJava'] //When uploading Maven-based publication files
+//    pkg {
+//        repo = 'JSONUtilities'
+//        // userOrg = 'myorg' //An optional organization name when the repo belongs to one of the user's orgs
+//        name = 'JSONUtilities'
+//        desc = ''
+//        websiteUrl = 'https://github.com/gokhanbarisaker/JSONUtilities'
+//        issueTrackerUrl = 'https://github.com/gokhanbarisaker/JSONUtilities/issues'
+//        vcsUrl = 'https://github.com/gokhanbarisaker/JSONUtilities.git'
+//        licenses = ['Apache-2.0']
+//        labels = ['android', 'json', 'utility']
+//        publicDownloadNumbers = true
+//        //Optional version descriptor
+//        version {
+//            name = '0.0.1' //Bintray logical version name
+//            desc = ''
+//            vcsTag = '0.0.1'
+//            // attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin'] //Optional version-level attributes
+//        }
+//    }
+//}

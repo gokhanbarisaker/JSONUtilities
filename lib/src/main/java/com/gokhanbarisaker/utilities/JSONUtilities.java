@@ -1,4 +1,4 @@
-package com.gokhanbarisaker.jsonutilities;
+package com.gokhanbarisaker.utilities;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -418,13 +418,13 @@ public class JSONUtilities
      * Log
      */
 
-    protected static boolean isLogEnabled()
+    private static boolean isLogEnabled()
     {
         return true;
     }
 
-    protected static String getLogTag()
-    {
-        return "JSON Utilities";
-    }
+//    private static String getLogTag()
+//    {
+//        return "JSON Utilities";
+//    }
 }

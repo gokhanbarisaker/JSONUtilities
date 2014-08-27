@@ -3,4 +3,5 @@
   <groupId>com.gokhanbarisaker.jsonutilities</groupId>
   <artifactId>jsonutilities</artifactId>
   <version>1.0.0</version>
+  <name>JSONUtilities</name>
 </project>

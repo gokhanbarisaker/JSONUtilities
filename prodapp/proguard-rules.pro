@@ -15,7 +15,3 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
--keep,allowoptimization public class com.gokhanbarisaker.utilities.JSONUtilities {
-    public static <methods>;
-}
